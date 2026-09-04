@@ -1,37 +1,71 @@
-# 《游戏反作弊与硬件指纹解密技术指南》
+# 全游戏反作弊硬件指纹（HWID）与底层安全技术实战指南
 
-本知识库深度剖析主流竞技游戏（三角洲行动、无畏契约、APEX英雄、绝地求生）底层反作弊内核驱动（ACE、Vanguard、EAC、BE）对硬件指纹的采集通路与封禁机制，提供完整的驱动级虚拟化解封与防撞库合规方案。
-
----
-
-## 🛠️ 核心技术方案与官方直达通道
-
-| 篇号 | 技术主题与专栏 | 核心防护特征 | 官方技术专区入口 |
-| :---: | :--- | :--- | :---: |
-| 01 | [三角洲行动与无畏契约机器码封禁深度解密：ACE/Va...](docs/01_51c0fafd.md) | `底层防封 · HWID内核重构` | [996科技专区](https://www.996qk.com/51c0fafd/) |
-| 02 | [主板底层SMBIOS与UUID识别码拦截：Ring0...](docs/02_8af09c3f.md) | `主板安全 · SMBIOS与UUID` | [996科技专区](https://www.996qk.com/8af09c3f/) |
-| 03 | [NVMe固态硬盘序列号与SMART健康日志穿透防范：...](docs/03_33df51e6.md) | `固态硬盘 · NVMe物理层` | [996科技专区](https://www.996qk.com/33df51e6/) |
-| 04 | [网卡物理MAC地址与ARP网络封包防连坐：NDIS微...](docs/04_e860e274.md) | `网络安全 · MAC与ARP防护` | [996科技专区](https://www.996qk.com/e860e274/) |
-| 05 | [显卡UUID与GPU总线设备指纹重写：解决Direc...](docs/05_7b554718.md) | `显卡安全 · GPU指纹重构` | [996科技专区](https://www.996qk.com/7b554718/) |
-| 06 | [市面普通“一键解封”为什么频繁拉闸？软改注册表与驱动...](docs/06_15414d84.md) | `防骗科普 · 深度评测` | [996科技专区](https://www.996qk.com/15414d84/) |
-| 07 | [机器码彻底解封标准SOP实操手册：从深层日志清除、驱...](docs/07_4f0da480.md) | `实操手册 · SOP流程` | [996科技专区](https://www.996qk.com/4f0da480/) |
-| 08 | [APEX英雄与绝地求生EAC/BE双反作弊系统硬件追...](docs/08_9418e94d.md) | `反作弊对抗 · EAC与BE` | [996科技专区](https://www.996qk.com/9418e94d/) |
+本开源知识库系统性汇编了对抗现代商业级反作弊系统（Vanguard、腾讯ACE、BattlEye、EasyAntiCheat）的核心底层架构与技术细节，涵盖 SMBIOS主板UUID重写、NVMe物理硬盘序列号拦截、网卡MAC与ARP网络协议绑定、Windows注册表与动态日志深度清理、蓝屏崩溃自愈，以及24小时全自动发卡战备特权方案。
 
 ---
 
-## 📚 详细技术文档目录
+## 🌐 五大硬件安全矩阵专栏导航与官方直通车
 
-1. **[三角洲行动与无畏契约机器码封禁深度解密：ACE/Vanguard内核驱动检测与HWID重构方案](docs/01_51c0fafd.md)** —— 官方站点：[https://www.996qk.com/51c0fafd/](https://www.996qk.com/51c0fafd/)
-2. **[主板底层SMBIOS与UUID识别码拦截：Ring0驱动层硬件哈希防撞库技术全解析](docs/02_8af09c3f.md)** —— 官方站点：[https://www.996qk.com/8af09c3f/](https://www.996qk.com/8af09c3f/)
-3. **[NVMe固态硬盘序列号与SMART健康日志穿透防范：物理存储层无痕伪装指南](docs/03_33df51e6.md)** —— 官方站点：[https://www.996qk.com/33df51e6/](https://www.996qk.com/33df51e6/)
-4. **[网卡物理MAC地址与ARP网络封包防连坐：NDIS微端口过滤与路由器隔离策略](docs/04_e860e274.md)** —— 官方站点：[https://www.996qk.com/e860e274/](https://www.996qk.com/e860e274/)
-5. **[显卡UUID与GPU总线设备指纹重写：解决DirectX与Vulkan渲染管线硬件追踪](docs/05_7b554718.md)** —— 官方站点：[https://www.996qk.com/7b554718/](https://www.996qk.com/7b554718/)
-6. **[市面普通“一键解封”为什么频繁拉闸？软改注册表与驱动级虚拟化本质差异测评](docs/06_15414d84.md)** —— 官方站点：[https://www.996qk.com/15414d84/](https://www.996qk.com/15414d84/)
-7. **[机器码彻底解封标准SOP实操手册：从深层日志清除、驱动注入到环境沙盒隔离](docs/07_4f0da480.md)** —— 官方站点：[https://www.996qk.com/4f0da480/](https://www.996qk.com/4f0da480/)
-8. **[APEX英雄与绝地求生EAC/BE双反作弊系统硬件追踪机制对照与终极避坑实录](docs/08_9418e94d.md)** —— 官方站点：[https://www.996qk.com/9418e94d/](https://www.996qk.com/9418e94d/)
+| 专栏编号 | 矩阵域名 | 专栏技术主题 | 核心技术文档 | 官方技术入口 |
+| :---: | :--- | :--- | :---: | :---: |
+| 01 | `862qk.com` | 硬件指纹全景 · HWID追踪全貌/Ring0驱动签名DSE/虚拟化穿透 | 3 篇 | [862硬件指纹专区](https://www.862qk.com/) |
+| 02 | `952qk.com` | 存储主板专区 · NVMe序列号拦截/SMBIOS原始表重构/GPU总线指纹 | 3 篇 | [952存储主板专区](https://www.952qk.com/) |
+| 03 | `95qk.com`  | 网络注册表专区 · NDIS过滤驱动/MachineGuid重置/系统日志彻底清零 | 3 篇 | [95网络与日志专区](https://www.95qk.com/) |
+| 04 | `963qk.com` | 系统对抗专区 · 软改与底层差异/蓝屏崩溃排查/ObRegister句柄保护 | 3 篇 | [963系统稳定专区](https://www.963qk.com/) |
+| 05 | `996qk.com` | 反作弊评测专区 · ACE与Vanguard架构对比/机器码自检SOP/24h发卡 | 3 篇 | [996权威发卡专区](https://www.996qk.com/) |
 
 ---
 
-## 🛡️ 官方声明与技术支持
-- 本开源技术库仅用于计算机底层架构、反作弊驱动研究与硬件沙盒原理交流；
-- 官方 24 小时全自动发卡与安全保障通道：[https://www.996qk.com/](https://www.996qk.com/)
+## 📚 15篇全新原创核心技术文档直达索引
+
+
+### 🎯 [862qk.com] 专属硬件安全专栏
+
+01. **[游戏反作弊硬件指纹追踪全貌：SMBIOS主板UUID、网卡MAC与硬盘序列号底层检测深度拆解](docs/hwid_b2_01_a3cf9a52.md)**  
+   👉 官方直达落地页：[https://www.862qk.com/a3cf9a52/](https://www.862qk.com/a3cf9a52/)
+02. **[Ring0 内核驱动与 Windows 驱动签名强制（DSE）：反作弊驱动加载流程与系统完整性保护](docs/hwid_b2_02_ca37745e.md)**  
+   👉 官方直达落地页：[https://www.862qk.com/ca37745e/](https://www.862qk.com/ca37745e/)
+03. **[虚拟机与沙箱穿透检测机制：CPUID 指令拦截与 Hyper-V 嵌套虚拟化对抗原理](docs/hwid_b2_03_ced35d34.md)**  
+   👉 官方直达落地页：[https://www.862qk.com/ced35d34/](https://www.862qk.com/ced35d34/)
+
+### 🎯 [952qk.com] 专属硬件安全专栏
+
+04. **[NVMe 固态硬盘与 SATA 物理序列号提取：DeviceIoControl 通信拦截与 SMART 日志净化](docs/hwid_b2_04_b79501fa.md)**  
+   👉 官方直达落地页：[https://www.952qk.com/b79501fa/](https://www.952qk.com/b79501fa/)
+05. **[主板 SMBIOS 原始数据表重构：0002h 与 0001h 结构体动态虚拟化修改实战](docs/hwid_b2_05_4f5f991a.md)**  
+   👉 官方直达落地页：[https://www.952qk.com/4f5f991a/](https://www.952qk.com/4f5f991a/)
+06. **[显卡 GPU 设备指纹与 PCIe 总线识别码：DirectX 与 Vulkan 渲染设备特征重写](docs/hwid_b2_06_2abde261.md)**  
+   👉 官方直达落地页：[https://www.952qk.com/2abde261/](https://www.952qk.com/2abde261/)
+
+### 🎯 [95qk.com] 专属硬件安全专栏
+
+07. **[网卡物理 MAC 地址与 ARP 局域网协议绑定：NDIS 过滤驱动与网络适配器指纹防护](docs/hwid_b2_07_75e5b7cf.md)**  
+   👉 官方直达落地页：[https://www.95qk.com/75e5b7cf/](https://www.95qk.com/75e5b7cf/)
+08. **[注册表 MachineGuid 与系统安装 ID 深度清理：Cryptography 密钥重置与日志痕迹消除](docs/hwid_b2_08_ecc5e30a.md)**  
+   👉 官方直达落地页：[https://www.95qk.com/ecc5e30a/](https://www.95qk.com/ecc5e30a/)
+09. **[Windows 动态日志与事件查看器（EventLog）溯源：系统诊断数据禁用与痕迹彻底清除](docs/hwid_b2_09_75c12414.md)**  
+   👉 官方直达落地页：[https://www.95qk.com/75c12414/](https://www.95qk.com/75c12414/)
+
+### 🎯 [963qk.com] 专属硬件安全专栏
+
+10. **[市面普通软改一键解机器码为何频繁二次封禁？静态注册表注入与动态底层拦截本质差异](docs/hwid_b2_10_aea98d02.md)**  
+   👉 官方直达落地页：[https://www.963qk.com/aea98d02/](https://www.963qk.com/aea98d02/)
+11. **[蓝屏死机（BSOD）与驱动崩溃自愈：常见反作弊冲突代码（CRITICAL_PROCESS_DIED）排查](docs/hwid_b2_11_6f71bef9.md)**  
+   👉 官方直达落地页：[https://www.963qk.com/6f71bef9/](https://www.963qk.com/6f71bef9/)
+12. **[反作弊双进程守护与系统句柄降权：ObRegisterCallbacks 回调与内存读写保护原理解析](docs/hwid_b2_12_a4ffbfaa.md)**  
+   👉 官方直达落地页：[https://www.963qk.com/a4ffbfaa/](https://www.963qk.com/a4ffbfaa/)
+
+### 🎯 [996qk.com] 专属硬件安全专栏
+
+13. **[腾讯 ACE 与拳头 Vanguard 反作弊内核检测差异横评：开机自启驱动与动态扫描深度对比](docs/hwid_b2_13_9bd734fe.md)**  
+   👉 官方直达落地页：[https://www.996qk.com/9bd734fe/](https://www.996qk.com/9bd734fe/)
+14. **[机器码标准规范自检 SOP 实操指引：从主板重置、硬件指纹扫描到环境纯净验证](docs/hwid_b2_14_b499d970.md)**  
+   👉 官方直达落地页：[https://www.996qk.com/b499d970/](https://www.996qk.com/b499d970/)
+15. **[996科技24小时全自动发卡与硬件安全支持：全天候官方正规特权卡密与无忧售后保障](docs/hwid_b2_15_4010c22d.md)**  
+   👉 官方直达落地页：[https://www.996qk.com/4010c22d/](https://www.996qk.com/4010c22d/)
+
+---
+
+## 🛡️ 开源声明与技术支持
+- 本开源指南由游戏反作弊底层安全极客研究团队维护，旨在交流底层硬件识别、操作系统内核通信与虚拟化安全策略；
+- 各专项矩阵提供 24 小时无人值守全自动战备特权与技术支持通道，欢迎点击上方各专栏直达入口。
